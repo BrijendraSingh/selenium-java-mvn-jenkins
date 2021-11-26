@@ -18,7 +18,7 @@ public class BasicTest extends BaseTest implements  IBaseTest{
     public void verifyInvalidRegistration(Method m) throws InterruptedException {
         System.out.println("driver instance in Test <" + m +">" +  driver.toString());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
+        wait.until(ExpectedConditions.elementToBeClickable(dismissBanner));
         driver.findElement(dismissBanner).click();
         Thread.sleep(1500);
 

@@ -15,7 +15,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup(){
-        driver =BrowserFactory.getDriver(Browser.CHROME);
+        driver =BrowserFactory.getDriver(Browser.REMOTE);
 
         driver.get(Config.getConfig("DEPLOYED_URL"));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
