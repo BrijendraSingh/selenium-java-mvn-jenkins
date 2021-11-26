@@ -7,24 +7,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import setup.BaseTest;
 
+import java.lang.reflect.Method;
 import java.time.Duration;
 
-public class BasicTestTwo implements IBaseTest  {
-
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setup(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.get(DOCKER_URL);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
+public class BasicTestTwo extends BaseTest implements IBaseTest  {
 
     @Test
-    public void verifyPasswordError() throws InterruptedException {
-
+    public void verifyPasswordError(Method m) throws InterruptedException {
+        System.out.println("driver instance in Test <" + m +">" +  driver.toString());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.findElement(dismissBanner).click();
 
@@ -47,10 +39,5 @@ public class BasicTestTwo implements IBaseTest  {
         //get error message
         String errorMsg = driver.findElement(uniqueRepeatPasswordError).getAttribute("innerText");
         Assert.assertEquals(errorMsg, UNIQUE_PASSWORD_ERROR, "User should have same repeat password");
-    }
-
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
     }
 }
