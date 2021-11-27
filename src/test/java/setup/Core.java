@@ -60,7 +60,7 @@ public class Core {
 
     public WebElement findElementByText(By by, String text){
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.invisibilityOfElementWithText(by, text));
+        wait.until(ExpectedConditions.textToBe(by, text));
         return driver.findElement(by);
     }
 

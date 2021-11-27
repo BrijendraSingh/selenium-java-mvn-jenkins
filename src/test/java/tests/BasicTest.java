@@ -8,8 +8,7 @@ import java.lang.reflect.Method;
 
 public class BasicTest extends BaseTest {
     @Test
-    public void verifyInvalidRegistration(Method m) throws InterruptedException {
-        Thread.sleep(2000);
+    public void verifyInvalidRegistration(Method m) {
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
         banner().dismissLandingBanner();
         navigation().openNewRegistrationForm();

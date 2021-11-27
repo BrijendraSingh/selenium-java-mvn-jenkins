@@ -19,11 +19,12 @@ public class BasicTestThree extends BaseTest {
     }
 
     @Test
-    public void verifyPasswordError(Method m){
+    public void verifyPasswordError(Method m) throws InterruptedException{
+        Thread.sleep(6000);
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
         banner().dismissLandingBanner();
         navigation().openNewRegistrationForm();
-        userCan().register();
+        userCan().registerDifferentRepeatPassword();
         Assert.assertEquals(userCan().readRepeatPasswordError(), UNIQUE_PASSWORD_ERROR,"User should have same repeat password");
     }
 }

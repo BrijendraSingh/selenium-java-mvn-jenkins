@@ -37,7 +37,6 @@ public class Registration extends Core {
         click(securityQuestion_dropDown);
         click(securityOptionsMaidenName_options);
         sendKeys(securityAnswer_textBox, "randomText");
-        click(register_btn);
         return this;
     }
 
