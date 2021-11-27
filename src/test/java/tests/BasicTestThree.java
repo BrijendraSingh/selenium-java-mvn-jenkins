@@ -1,5 +1,6 @@
 package tests;
 
+import builder.Customer;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import setup.BaseTest;
@@ -12,9 +13,19 @@ public class BasicTestThree extends BaseTest {
     public void verifyInvalidRegistration(Method m) throws InterruptedException {
         Thread.sleep(3000);
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
+
+        //create new customer data
+        Customer customer = new Customer.CustomerBuilder()
+                .email("laverna.dubuque@hotmail.com")
+                .password("abc123")
+                .repeatPassword("abc123")
+                .maidenName("random text")
+                .clickRegister(true)
+                .build();
+
         banner().dismissLandingBanner();
         navigation().openNewRegistrationForm();
-        userCan().register();
+        userCan().register(customer);
         Assert.assertEquals(userCan().readUniqueUserError(UNIQUE_USER_ERROR), UNIQUE_USER_ERROR,"User with already used email can not be created");
     }
 
@@ -22,9 +33,18 @@ public class BasicTestThree extends BaseTest {
     public void verifyPasswordError(Method m) throws InterruptedException{
         Thread.sleep(6000);
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
+        //create new customer data
+        Customer customer = new Customer.CustomerBuilder()
+                .email("laverna.dubuque@hotmail.com")
+                .password("abc123")
+                .repeatPassword("abc1233")
+                .maidenName("random text")
+                .clickRegister(false)
+                .build();
+
         banner().dismissLandingBanner();
         navigation().openNewRegistrationForm();
-        userCan().registerDifferentRepeatPassword();
+        userCan().register(customer);
         Assert.assertEquals(userCan().readRepeatPasswordError(), UNIQUE_PASSWORD_ERROR,"User should have same repeat password");
     }
 }

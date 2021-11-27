@@ -1,5 +1,6 @@
 package pomodal;
 
+import builder.Customer;
 import org.openqa.selenium.By;
 import setup.Core;
 
@@ -17,26 +18,17 @@ public class Registration extends Core {
     By uniqueUserError_msg = By.className("error");
     By uniqueRepeatPasswordError = By.cssSelector("mat-error.mat-error");
 
-    public Registration register(){
-        sendKeys(email_textBox, "laverna.dubuque@hotmail.com");
-        sendKeys(password_textBox, "abc1234");
-        sendKeys(repeatPassword_textBox, "abc1234");
+    public Registration register(Customer customer){
+        sendKeys(email_textBox, customer.getEmail());
+        sendKeys(password_textBox, customer.getPassword());
+        sendKeys(repeatPassword_textBox, customer.getRepeatPassword());
 
         click(securityQuestion_dropDown);
         click(securityOptionsMaidenName_options);
-        sendKeys(securityAnswer_textBox, "randomText");
-        click(register_btn);
-        return this;
-    }
-
-    public Registration registerDifferentRepeatPassword(){
-        sendKeys(email_textBox, "laverna.dubuque@hotmail.com");
-        sendKeys(password_textBox, "abc1234");
-        sendKeys(repeatPassword_textBox, "abc12345");
-
-        click(securityQuestion_dropDown);
-        click(securityOptionsMaidenName_options);
-        sendKeys(securityAnswer_textBox, "randomText");
+        sendKeys(securityAnswer_textBox, customer.getMaidenName());
+        if (customer.getClickRegister()) {
+            click(register_btn);
+        }
         return this;
     }
 
