@@ -25,8 +25,6 @@ public class BaseTest {
         threadDriver.set(BrowserFactory.getDriver(Browser.CHROME));
 
         threadDriver.get().get(Config.getConfig("DOCKER_URL"));
-//        Dimension dim = new Dimension(800,600);
-//        driver.manage().window().setSize(dim);
         threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         System.out.println("driver instance in Before each--> " +  threadDriver.get().toString());
 

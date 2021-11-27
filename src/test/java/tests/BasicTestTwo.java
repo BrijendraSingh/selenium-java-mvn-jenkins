@@ -14,7 +14,7 @@ public class BasicTestTwo extends BaseTest  {
         Thread.sleep(9000);
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
         //create new customer data
-        Customer customer = new Customer.CustomerBuilder()
+        Customer customer = Customer.builder()
                 .email("laverna.dubuque@hotmail.com")
                 .password("abc123")
                 .repeatPassword("abc1232")

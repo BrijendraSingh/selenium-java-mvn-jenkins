@@ -14,8 +14,7 @@ public class BasicTestThree extends BaseTest {
         Thread.sleep(3000);
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
 
-        //create new customer data
-        Customer customer = new Customer.CustomerBuilder()
+        Customer customer = Customer.builder()
                 .email("laverna.dubuque@hotmail.com")
                 .password("abc123")
                 .repeatPassword("abc123")
@@ -34,7 +33,7 @@ public class BasicTestThree extends BaseTest {
         Thread.sleep(6000);
         System.out.println("driver instance in Test <" + m +">" +  driver().toString());
         //create new customer data
-        Customer customer = new Customer.CustomerBuilder()
+        Customer customer = Customer.builder()
                 .email("laverna.dubuque@hotmail.com")
                 .password("abc123")
                 .repeatPassword("abc1233")

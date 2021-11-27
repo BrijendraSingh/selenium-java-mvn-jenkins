@@ -26,7 +26,7 @@ public class Registration extends Core {
         click(securityQuestion_dropDown);
         click(securityOptionsMaidenName_options);
         sendKeys(securityAnswer_textBox, customer.getMaidenName());
-        if (customer.getClickRegister()) {
+        if (customer.isClickRegister()) {
             click(register_btn);
         }
         return this;
