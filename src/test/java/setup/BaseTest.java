@@ -2,10 +2,7 @@ package setup;
 
 import factory.Browser;
 import factory.BrowserFactory;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pomodal.Banner;
@@ -14,20 +11,21 @@ import pomodal.Registration;
 
 import java.time.Duration;
 
-public class BaseTest {
-//    protected WebDriver driver;
+import static io.qameta.allure.Allure.step;
+
+public class BaseTest{
     ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
     public final String UNIQUE_USER_ERROR = "Email must be unique";
     public final String UNIQUE_PASSWORD_ERROR = "Passwords do not match";
 
     @BeforeMethod
     public void setup(){
+        step(Browser.CHROME + " : Browser Is Instantiated");
         threadDriver.set(BrowserFactory.getDriver(Browser.CHROME));
-
         threadDriver.get().get(Config.getConfig("DOCKER_URL"));
+        step(Config.getConfig("DOCKER_URL")+ " : Application URL Is launched");
         threadDriver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        System.out.println("driver instance in Before each--> " +  threadDriver.get().toString());
-
+        step("driver instance: " +  threadDriver.get().toString());
     }
 
     public WebDriver driver(){
@@ -49,8 +47,9 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown(){
-        System.out.println("driver instance in After each--> " +  threadDriver.get().toString());
+        step("driver instance: " +  threadDriver.get().toString());
         threadDriver.get().quit();
         threadDriver.remove();
+        step("driver is closed");
     }
 }

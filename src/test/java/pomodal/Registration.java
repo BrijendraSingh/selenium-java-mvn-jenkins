@@ -4,6 +4,8 @@ import builder.Customer;
 import org.openqa.selenium.By;
 import setup.Core;
 
+import static io.qameta.allure.Allure.step;
+
 public class Registration extends Core {
     //Registration fields
     By email_textBox = By.id("emailControl");
@@ -19,6 +21,7 @@ public class Registration extends Core {
     By uniqueRepeatPasswordError = By.cssSelector("mat-error.mat-error");
 
     public Registration register(Customer customer){
+        step("User complete the customer registration with data: " + customer.toString());
         sendKeys(email_textBox, customer.getEmail());
         sendKeys(password_textBox, customer.getPassword());
         sendKeys(repeatPassword_textBox, customer.getRepeatPassword());
@@ -27,17 +30,19 @@ public class Registration extends Core {
         click(securityOptionsMaidenName_options);
         sendKeys(securityAnswer_textBox, customer.getMaidenName());
         if (customer.isClickRegister()) {
+            step("User clicks the Registration Button");
             click(register_btn);
         }
         return this;
     }
 
     public String readUniqueUserError(String errorText){
+        step("User read the Unique User Error Message:" + errorText);
         return getText(uniqueUserError_msg, errorText);
     }
 
     public String readRepeatPasswordError(){
+        step("User read the repeat password Error Message");
         return getText(uniqueRepeatPasswordError);
     }
-
 }
